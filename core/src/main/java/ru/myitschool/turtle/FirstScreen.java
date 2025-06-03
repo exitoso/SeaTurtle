@@ -2,19 +2,19 @@ package ru.myitschool.turtle;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
-import com.sun.tools.javac.Main;
 
 /** First screen of the application. Displayed after the application is created. */
 public class FirstScreen implements Screen {
@@ -54,12 +54,27 @@ public class FirstScreen implements Screen {
         touchpad = createTouchpad();
         touchpad.setPosition(0, 0);
 
+        Label scores = createScores();
+        scores.setPosition(50, 540);
+        stage.addActor(scores);
+
         Texture turtleTexture = new Texture("turtle-1.png");
-        turtleActor = new TurtleActor(turtleTexture, touchpad);
+        turtleActor = new TurtleActor(turtleTexture, touchpad, scores);
         turtleActor.setPosition(500, 300);
         stage.addActor(turtleActor);
         stage.addActor(touchpad);
 
+    }
+
+    private Label createScores() {
+        FileHandle fontFile = Gdx.files.internal("font.ttf");
+        FreeTypeFontGenerator fontGenerator = new FreeTypeFontGenerator(fontFile);
+        FreeTypeFontGenerator.FreeTypeFontParameter params = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        params.size = 100;
+        BitmapFont bitmapFont = fontGenerator.generateFont(params);
+
+        Label.LabelStyle labelStyle = new Label.LabelStyle(bitmapFont, Color.RED);
+        return new Label("0", labelStyle);
     }
 
 

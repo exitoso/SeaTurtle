@@ -5,12 +5,11 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Intersector;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Polygon;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
 import com.badlogic.gdx.utils.Array;
 
@@ -22,12 +21,13 @@ public class TurtleActor extends Actor {
     private final Touchpad touchpad;
     public static final int SPEED = 5;
     private float stateTime = 0;
+    private Label scores;
 
 
-
-    public TurtleActor(Texture texture, Touchpad touchpad){
+    public TurtleActor(Texture texture, Touchpad touchpad, Label scores){
         this.textureRegion = new TextureRegion(texture);
         this.touchpad = touchpad;
+        this.scores = scores;
 
         setWidth(texture.getWidth());
         setHeight(texture.getHeight());
@@ -56,7 +56,14 @@ public class TurtleActor extends Actor {
             if(actor instanceof StarFishActor){
                 StarFishActor starFishActor = (StarFishActor)actor;
                 boolean isOverlap = Intersector.overlapConvexPolygons(hitbox, starFishActor.getHitbox());
-                if (isOverlap) {starFishActor.remove();}
+                if (isOverlap) {
+                    starFishActor.remove();
+                    // starFishActor.reSpawn();
+                    String text = scores.getText().toString();
+                    int scoresInt = Integer.parseInt(text);
+                    int newScores = scoresInt + 1;
+                    scores.setText(newScores);
+                }
 
             }
             if(actor instanceof RockActor){
