@@ -52,10 +52,10 @@ public class FirstScreen implements Screen {
         }
 
         touchpad = createTouchpad();
-        touchpad.setPosition(0, 0);
+        touchpad.setPosition(MainGame.WORLD_WIDTH - touchpad.getWidth() - 50, 50);
 
         Label scores = createScores();
-        scores.setPosition(50, 540);
+        scores.setPosition(30, 580);
         stage.addActor(scores);
 
         Texture turtleTexture = new Texture("turtle-1.png");
@@ -79,7 +79,6 @@ public class FirstScreen implements Screen {
 
 
     private Touchpad createTouchpad(){
-
         Texture backgroundTexture = new Texture("joystick-background.png");
         TextureRegionDrawable background = new TextureRegionDrawable(backgroundTexture);
         Texture knobTexture = new Texture("joystick-knob.png");
@@ -95,10 +94,6 @@ public class FirstScreen implements Screen {
         ScreenUtils.clear(Color.CLEAR);
         stage.act();
         stage.draw();
-        cam = (OrthographicCamera) stage.getViewport().getCamera();
-        cam.position.set(turtleActor.getX()+100, turtleActor.getY(),0);
-
-        touchpad.setPosition(turtleActor.getX()+550, turtleActor.getY()-300);
     }
 
     @Override

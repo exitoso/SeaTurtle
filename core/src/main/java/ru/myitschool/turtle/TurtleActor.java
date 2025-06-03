@@ -120,6 +120,21 @@ public class TurtleActor extends Actor {
 
         checkOverLap();
 
+        if (getY() < 0) {
+            setY(0);
+        }
+
+        if (getX() < 0) {
+            setX(0);
+        }
+
+        if(getY() + getHeight() > MainGame.WORLD_HEIGHT) {
+            setY(MainGame.WORLD_HEIGHT - getHeight());
+        }
+
+        if (getX() + getWidth() > MainGame.WORLD_WIDTH) {
+            setX(MainGame.WORLD_WIDTH - getWidth());
+        }
     }
 
 
