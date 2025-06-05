@@ -17,7 +17,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
 /** First screen of the application. Displayed after the application is created. */
-public class FirstScreen implements Screen {
+public class GameScreen implements Screen {
     private FitViewport viewport;
     private Stage stage;
     private static final int STARFISH_COUNT = 10;
@@ -25,7 +25,11 @@ public class FirstScreen implements Screen {
     private TurtleActor turtleActor;
     private OrthographicCamera cam;
     private Touchpad touchpad;
+    private Color backgroundColor = Color.valueOf("003366FF");
 
+    public GameScreen(MainGame mainGame) {
+
+    }
 
     @Override
     public void show() {
@@ -67,12 +71,7 @@ public class FirstScreen implements Screen {
     }
 
     private Label createScores() {
-        FileHandle fontFile = Gdx.files.internal("font.ttf");
-        FreeTypeFontGenerator fontGenerator = new FreeTypeFontGenerator(fontFile);
-        FreeTypeFontGenerator.FreeTypeFontParameter params = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        params.size = 100;
-        BitmapFont bitmapFont = fontGenerator.generateFont(params);
-
+        BitmapFont bitmapFont = MainGame.createFont(100);
         Label.LabelStyle labelStyle = new Label.LabelStyle(bitmapFont, Color.RED);
         return new Label("0", labelStyle);
     }
@@ -91,7 +90,7 @@ public class FirstScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        ScreenUtils.clear(Color.CLEAR);
+        ScreenUtils.clear(backgroundColor);
         stage.act();
         stage.draw();
     }
