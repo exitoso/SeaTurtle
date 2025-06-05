@@ -38,13 +38,19 @@ public class StarFishActor extends Actor {
         RepeatAction scaleForeverAction = Actions.forever(sequenceAction);
         addAction(scaleForeverAction);
 
-
-
         int direction = MathUtils.randomSign();
         RotateByAction rotateByAction = Actions.rotateBy(direction*360, 3);
         RepeatAction foreverRotateAction = Actions.forever(rotateByAction);
         addAction(foreverRotateAction);
 
+    }
+
+    public void reSpawn() {
+        float startX = MathUtils.random(MainGame.WORLD_WIDTH-getWidth());
+        float startY = MathUtils.random(MainGame.WORLD_HEIGHT-getHeight());
+
+        setPosition(startX, startY);
+        hitbox.setPosition(startX, startY);
     }
 
     public Polygon getHitbox(){

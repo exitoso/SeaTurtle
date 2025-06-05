@@ -57,8 +57,7 @@ public class TurtleActor extends Actor {
                 StarFishActor starFishActor = (StarFishActor)actor;
                 boolean isOverlap = Intersector.overlapConvexPolygons(hitbox, starFishActor.getHitbox());
                 if (isOverlap) {
-                    starFishActor.remove();
-                    // starFishActor.reSpawn();
+                    starFishActor.reSpawn();
                     String text = scores.getText().toString();
                     int scoresInt = Integer.parseInt(text);
                     int newScores = scoresInt + 1;
