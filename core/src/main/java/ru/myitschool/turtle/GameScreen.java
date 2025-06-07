@@ -87,8 +87,12 @@ public class GameScreen extends ScreenAdapter {
         TurtleActor turtleActor = new TurtleActor(turtleTexture, touchpad, scores);
         turtleActor.setPosition(500, 300);
         stage.addActor(turtleActor);
-        stage.addActor(touchpad);
 
+        Texture enemyTexture = new Texture("shark_new.png");
+        EnemyActor enemyActor = new EnemyActor(enemyTexture, turtleActor);
+        stage.addActor(enemyActor);
+
+        stage.addActor(touchpad);
     }
 
     private Label createScores() {
