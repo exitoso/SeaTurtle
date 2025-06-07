@@ -25,7 +25,6 @@ public class GameScreen implements Screen {
     private TurtleActor turtleActor;
     private OrthographicCamera cam;
     private Touchpad touchpad;
-    private Color backgroundColor = Color.valueOf("003366FF");
 
     public GameScreen(MainGame mainGame) {
 
@@ -36,6 +35,10 @@ public class GameScreen implements Screen {
         viewport = new FitViewport(MainGame.WORLD_WIDTH, MainGame.WORLD_HEIGHT);
         stage = new Stage(viewport);
         Gdx.input.setInputProcessor(stage);
+
+        Texture backgroundTexture = new Texture("water.jpg");
+        BackgroundActor backgroundActor = new BackgroundActor(backgroundTexture);
+        stage.addActor(backgroundActor);
 
         Texture starfishTexture = new Texture("starfish.png");
         for (int i = 0; i < STARFISH_COUNT ; i++) {
@@ -90,7 +93,7 @@ public class GameScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        ScreenUtils.clear(backgroundColor);
+        ScreenUtils.clear(Color.CLEAR);
         stage.act();
         stage.draw();
     }
