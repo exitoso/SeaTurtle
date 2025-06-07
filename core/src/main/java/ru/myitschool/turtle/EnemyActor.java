@@ -25,12 +25,12 @@ public class EnemyActor extends Actor {
         setRotation(0);
 
         float[] vertices = {
-            0, texture.getHeight() / 2F,
-            texture.getWidth() / 3F, texture.getHeight(),
-            2 * texture.getWidth() / 3F, texture.getHeight(),
-            texture.getWidth(), texture.getHeight() / 2F,
-            2 * texture.getWidth() / 3F, 0,
-            texture.getWidth() / 3F, 0
+            0, getHeight() / 2F,
+            getWidth() / 3F, getHeight(),
+            2 * getWidth() / 3F, getHeight(),
+            getWidth(), getHeight() / 2F,
+            2 * getWidth() / 3F, 0,
+            getWidth() / 3F, 0
         };
         hitbox = new Polygon(vertices);
         hitbox.setOrigin(getOriginX(), getOriginY());

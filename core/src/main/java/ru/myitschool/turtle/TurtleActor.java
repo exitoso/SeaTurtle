@@ -75,6 +75,19 @@ public class TurtleActor extends Actor {
                     moveBy(nextX, nextY);
                 }
             }
+            if(actor instanceof EnemyActor){
+                EnemyActor enemyActor = (EnemyActor) actor;
+                boolean isOverlap = Intersector.overlapConvexPolygons(hitbox, enemyActor.getHitbox());
+
+                if(isOverlap) {
+                    GameOverActor gameOverActor = new GameOverActor();
+                    getStage().addActor(gameOverActor);
+
+                    enemyActor.remove();
+                    touchpad.remove();
+                    remove();
+                }
+            }
         }
     }
 
