@@ -1,6 +1,9 @@
 package ru.myitschool.turtle;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputAdapter;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -21,7 +24,21 @@ public class MenuScreen extends ScreenAdapter {
         this.game = mainGame;
         viewport = new FitViewport(MainGame.WORLD_WIDTH / 1.5F, MainGame.WORLD_HEIGHT / 1.5F);
         stage = new Stage(viewport);
-        Gdx.input.setInputProcessor(stage);
+
+        InputAdapter backInputAdapter = new InputAdapter() {
+            @Override
+            public boolean keyDown(int keycode) {
+                if (keycode == Input.Keys.BACK) {
+                    Gdx.app.exit();
+                    dispose();
+                    return true;
+                }
+                return false;
+            }
+        };
+
+        InputMultiplexer inputMultiplexer = new InputMultiplexer(stage, backInputAdapter);
+        Gdx.input.setInputProcessor(inputMultiplexer);
 
         ImageTextButton.ImageTextButtonStyle textButtonStyle = new ImageTextButton.ImageTextButtonStyle();
         textButtonStyle.up = new TextureRegionDrawable(new Texture("buttons/g9202.png"));

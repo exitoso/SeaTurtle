@@ -21,6 +21,10 @@ public class MainGame extends Game {
         setScreen(new GameScreen(this));
     }
 
+    public void openMenuScreen(){
+        setScreen(new MenuScreen(this));
+    }
+
     public static BitmapFont createFont(int fontSize) {
         FileHandle fontFile = Gdx.files.internal("font.ttf");
         FreeTypeFontGenerator fontGenerator = new FreeTypeFontGenerator(fontFile);
